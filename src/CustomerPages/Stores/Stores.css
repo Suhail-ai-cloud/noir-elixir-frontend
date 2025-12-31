@@ -1,0 +1,104 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap");
+
+.apple-stores {
+  font-family: Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+  /* background: #ffffff; */
+  color: #1d1d1f;
+  padding: 140px 8vw;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* HEADER */
+.apple-stores header {
+  max-width: 520px;
+  margin-bottom: 120px;
+}
+
+.apple-stores h1 {
+  font-size: 56px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+}
+
+.apple-stores p {
+  font-size: 17px;
+  color: #6e6e73;
+  margin-bottom: 40px;
+}
+
+.apple-stores input {
+  width: 100%;
+  padding: 16px 18px;
+  font-size: 16px;
+  border-radius: 12px;
+  border: 1px solid #d2d2d7;
+  outline: none;
+}
+
+/* COUNTRY */
+.country {
+  margin-bottom: 120px;
+}
+
+.country h2 {
+  font-size: 32px;
+  font-weight: 500;
+  margin-bottom: 40px;
+}
+
+/* STORE ROW */
+.store-row {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 40px;
+  padding: 40px 0;
+  border-bottom: 1px solid #f2f2f2;
+}
+
+.store-row img {
+  width: 100%;
+  aspect-ratio: 16 / 9;   /* ✅ PERFECT RATIO */
+  object-fit: cover;
+  border-radius: 14px;
+}
+
+/* INFO */
+.store-info h3 {
+  font-size: 22px;
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+
+.store-info a {
+  display: block;
+  font-size: 15px;
+  color: #1d1d1f;
+  text-decoration: none;
+  margin-bottom: 8px;
+}
+
+.store-info .map-link {
+  color: #0071e3;
+  font-weight: 400;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .apple-stores {
+    padding: 100px 6vw;
+  }
+
+  .apple-stores h1 {
+    font-size: 40px;
+  }
+
+  .store-row {
+    grid-template-columns: 1fr;
+  }
+
+  .store-row img {
+    height: 200px;
+  }
+}

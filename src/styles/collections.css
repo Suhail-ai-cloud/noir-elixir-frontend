@@ -1,0 +1,149 @@
+/* ===============================
+   SECTION
+================================ */
+
+.lux-collections {
+  padding: 120px 6vw;
+  overflow: hidden;
+}
+
+/* ===============================
+   HEADER
+================================ */
+
+.lux-collections-header {
+  max-width: 1200px;
+  margin: 0 auto 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.lux-collections-header h2 {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+}
+
+.lux-collections-header button {
+  background: none;
+  border: none;
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+/* ===============================
+   RAIL
+================================ */
+
+.lux-collections-rail {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* TRACK */
+.lux-collections-track {
+  display: flex;
+  gap: 36px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding-bottom: 10px;
+}
+
+.lux-collections-track::-webkit-scrollbar {
+  display: none;
+}
+
+/* ===============================
+   CARD
+================================ */
+
+.lux-collection-card {
+  flex: 0 0 300px;
+  cursor: pointer;
+}
+
+.lux-collection-image {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  background: #f7f7f7;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  margin-bottom: 18px;
+}
+
+.lux-collection-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 10%;
+}
+
+.lux-collection-info h3 {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+
+.lux-collection-info p {
+  font-size: 0.85rem;
+  opacity: 0.75;
+  margin-bottom: 10px;
+}
+
+.lux-collection-tag {
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.6;
+}
+
+.lux-collection-price {
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+/* ===============================
+   ARROWS (APPLE STYLE)
+================================ */
+
+.lux-arrow {
+  position: absolute;
+  top: 38%;
+  background: rgba(255,255,255,0.9);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(0,0,0,0.15);
+  border-radius: 50%;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 5;
+}
+
+.lux-arrow-left {
+  left: -18px;
+}
+
+.lux-arrow-right {
+  right: -18px;
+}
+
+/* ===============================
+   MOBILE
+================================ */
+
+@media (max-width: 768px) {
+  .lux-arrow {
+    display: none;
+  }
+
+  .lux-collection-card {
+    flex: 0 0 260px;
+  }
+}

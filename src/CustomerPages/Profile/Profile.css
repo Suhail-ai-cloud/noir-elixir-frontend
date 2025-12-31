@@ -1,0 +1,63 @@
+.profile-wrapper {
+  min-height: 70vh;
+  padding: 140px 6vw;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.profile-title {
+  font-size: 40px;
+  font-weight: 500;
+  margin-bottom: 60px;
+}
+
+/* NOT LOGGED IN */
+.profile-guest {
+  max-width: 420px;
+}
+
+.profile-guest p {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 24px;
+}
+
+/* LOGGED IN */
+.profile-actions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+  max-width: 700px;
+}
+
+.profile-card {
+  padding: 24px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.25s ease;
+}
+
+.profile-card:hover {
+  border-color: #000;
+  transform: translateY(-2px);
+}
+
+.profile-card.logout {
+  border-color: #e5e5e5;
+  color: #b00020;
+}
+
+.profile-card.logout:hover {
+  border-color: #b00020;
+}
+
+/* BUTTON */
+.btn-primary {
+  padding: 14px 28px;
+  background: #000;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}

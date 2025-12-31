@@ -1,0 +1,98 @@
+.hero {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  background: #000;
+  overflow: hidden;
+}
+
+/* BACKGROUND IMAGE */
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url("/assets/highlight3.png"); /* adjust if needed */
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.82);
+  transform: scale(1.05);
+  z-index: 1;
+}
+
+/* HERO TEXT */
+.hero-content {
+  position: absolute;
+  bottom: 60%;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  color: #fff;
+  z-index: 2;
+  padding: 0 20px;
+}
+
+/* HERO TITLE */
+.hero-content h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 5vw, 4.6rem);
+  font-weight: 400;
+  letter-spacing: var(--ls-wide);
+  margin-bottom: 26px;
+
+line-height: 1.15;}
+
+/* HERO SUBTITLE */
+.hero-content p {
+  font-size: 0.95rem;
+  letter-spacing: var(--ls-medium);
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .hero-content {
+    bottom: 10%;
+  }
+
+  .hero-content h1 {
+    letter-spacing: 0.16em;
+  }
+}
+.hero-content p {
+  margin-top: 6px;
+  letter-spacing: 0.22em;
+}
+@media (max-width: 768px) {
+  .hero-content {
+    bottom: 16%;
+  }
+
+  .hero-content h1 {
+    font-size: clamp(2.4rem, 7vw, 3.2rem);
+    letter-spacing: 0.14em;
+  }
+}
+/* =========================
+   SMALL SCREENS ONLY FIX
+   (DESKTOP UNTOUCHED)
+========================= */
+
+@media (max-width: 480px) {
+  .hero-content {
+    bottom: 22%;              /* lift text slightly */
+    padding: 0 16px;
+  }
+
+  .hero-content h1 {
+    font-size: 2.4rem;        /* stable size for very small screens */
+    letter-spacing: 0.12em;  /* tighter = more premium on mobile */
+    line-height: 1.18;
+    margin-bottom: 18px;
+  }
+
+  .hero-content p {
+    font-size: 0.82rem;
+    letter-spacing: 0.18em;
+    opacity: 0.9;
+  }
+}

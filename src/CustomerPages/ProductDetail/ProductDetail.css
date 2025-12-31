@@ -1,0 +1,279 @@
+.pd-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 100px;
+  padding: 120px 8vw;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* IMAGE */
+.pd-image {
+  background: #111;
+  border-radius: 22px;
+  padding: 60px;
+}
+
+.pd-image img {
+  width: 100%;
+  object-fit: contain;
+}
+
+/* INFO */
+.pd-info h1 {
+  font-size: 42px;
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+
+.pd-scent {
+  font-size: 15px;
+  color: #666;
+  margin-bottom: 24px;
+}
+
+.pd-price {
+  font-size: 24px;
+  font-weight: 500;
+  margin-bottom: 28px;
+}
+
+/* VARIANTS */
+.pd-variants label {
+  font-size: 13px;
+  color: #666;
+}
+
+.variant-options {
+  display: flex;
+  gap: 12px;
+  margin-top: 10px;
+  margin-bottom: 26px;
+}
+
+.variant-btn {
+  padding: 10px 18px;
+  border: 1px solid #ccc;
+  background: transparent;
+  cursor: pointer;
+}
+
+.variant-btn.active {
+  border-color: #000;
+  background: #000;
+  color: #fff;
+}
+
+/* QUANTITY */
+.pd-quantity label {
+  font-size: 13px;
+  color: #666;
+}
+
+.qty-controls {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 8px;
+  margin-bottom: 30px;
+}
+
+.qty-controls button {
+  width: 34px;
+  height: 34px;
+  border: 1px solid #ccc;
+  background: transparent;
+  cursor: pointer;
+}
+
+/* DESCRIPTION */
+.pd-desc {
+  font-size: 15px;
+  line-height: 1.7;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+/* META */
+.pd-meta {
+  display: flex;
+  gap: 30px;
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 40px;
+}
+
+/* ACTIONS */
+.pd-actions {
+  display: flex;
+  gap: 16px;
+}
+
+.btn-primary {
+  padding: 14px 26px;
+  background: #000;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-secondary {
+  padding: 14px 26px;
+  background: transparent;
+  border: 1px solid #000;
+  cursor: pointer;
+}
+/* UNIT PRICE TEXT */
+.pd-unit-price {
+  font-size: 14px;
+  color: #777;
+  font-weight: 400;
+}
+
+/* DISABLE + BUTTON WHEN STOCK LIMIT */
+.qty-controls button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+/* IMAGE SECTION */
+.pd-image-section {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* MAIN IMAGE */
+.pd-image {
+  background: #fafafa;
+  border-radius: 24px;
+  padding: 60px;
+}
+
+.pd-image img {
+  width: 100%;
+  height: 520px;
+  object-fit: contain;
+}
+
+/* THUMBNAILS */
+.pd-thumbs {
+  display: flex;
+  gap: 14px;
+}
+
+.pd-thumb {
+  width: 72px;
+  height: 90px;
+  border-radius: 14px;
+  background: #f4f4f4;
+  border: 1px solid transparent;
+  cursor: pointer;
+  padding: 10px;
+  transition: border 0.25s ease;
+}
+
+.pd-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.pd-thumb.active {
+  border-color: #000;
+}
+
+/* ACTION BUTTON */
+.btn-primary {
+  padding: 16px 34px;
+  background: #000;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+}
+.pd-image,
+.pd-thumb,
+.pd-info * {
+  will-change: transform, opacity, filter;
+}
+@media (max-width: 480px) {
+  .pd-wrapper {
+    grid-template-columns: 1fr;
+    gap: 56px;
+    padding: 88px 6vw;
+  }
+
+  .pd-image {
+    padding: 36px;
+    border-radius: 20px;
+  }
+
+  .pd-image img {
+    height: 360px;
+  }
+
+  .pd-thumbs {
+    gap: 10px;
+  }
+
+  .pd-thumb {
+    width: 60px;
+    height: 76px;
+    padding: 8px;
+    border-radius: 12px;
+  }
+
+  .pd-info h1 {
+    font-size: 30px;
+    margin-bottom: 10px;
+    letter-spacing: -0.01em;
+  }
+
+  .pd-scent {
+    font-size: 13px;
+    margin-bottom: 18px;
+  }
+
+  .pd-price {
+    font-size: 20px;
+    margin-bottom: 22px;
+  }
+
+  .pd-unit-price {
+    font-size: 12px;
+  }
+
+  .variant-options {
+    gap: 10px;
+    margin-bottom: 22px;
+  }
+
+  .variant-btn {
+    padding: 9px 14px;
+    font-size: 13px;
+  }
+
+  .qty-controls {
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .qty-controls button {
+    width: 32px;
+    height: 32px;
+  }
+
+  .pd-desc {
+    font-size: 14px;
+    line-height: 1.65;
+    margin-bottom: 26px;
+  }
+
+  .pd-actions {
+    margin-top: 8px;
+  }
+
+  .btn-primary {
+    padding: 14px 28px;
+    font-size: 13px;
+  }
+}

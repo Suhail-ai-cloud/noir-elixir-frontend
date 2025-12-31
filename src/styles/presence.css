@@ -1,0 +1,136 @@
+/* ===============================
+   GLOBAL PRESENCE SECTION
+================================ */
+
+.presence-section {
+  width: 100%;
+  padding: 140px 6vw;
+  /* background: #fff; */
+  transform: translateX(-58px); /* matches your site alignment */
+}
+
+.presence-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* ===============================
+   HEADER
+================================ */
+
+.presence-header {
+  max-width: 620px;
+  margin-bottom: 80px;
+}
+
+.presence-header h2 {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 4.5vw, 3.4rem);
+  font-weight: 400;
+  letter-spacing: var(--ls-wide);
+  margin-bottom: 18px;
+}
+
+.presence-header p {
+  font-size: 0.95rem;
+  letter-spacing: var(--ls-medium);
+  opacity: 0.85;
+}
+
+/* ===============================
+   GRID
+================================ */
+
+.presence-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 48px;
+}
+
+/* ===============================
+   CARD
+================================ */
+
+.presence-card {
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+  padding-top: 28px;
+}
+
+.presence-value {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 3vw, 2.8rem);
+  font-weight: 400;
+  margin-bottom: 6px;
+}
+
+.presence-label {
+  font-size: 0.85rem;
+  letter-spacing: var(--ls-medium);
+  opacity: 0.8;
+}
+
+/* ===============================
+   MOBILE
+================================ */
+
+@media (max-width: 1024px) {
+  .presence-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .presence-section {
+    padding: 100px 6vw;
+    transform: none;
+  }
+
+  .presence-header {
+    margin-bottom: 60px;
+  }
+
+  .presence-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+}
+@media (max-width: 480px) {
+  .presence-section {
+    padding: 84px 6vw;
+  }
+
+  .presence-header {
+    margin-bottom: 48px;
+  }
+
+  .presence-header h2 {
+    font-size: 2rem;
+    letter-spacing: 0.14em;
+    margin-bottom: 14px;
+  }
+
+  .presence-header p {
+    font-size: 0.88rem;
+    letter-spacing: 0.12em;
+  }
+
+  .presence-grid {
+    gap: 32px;
+  }
+
+  .presence-card {
+    padding-top: 22px;
+  }
+
+  .presence-value {
+    font-size: 2rem;
+    margin-bottom: 4px;
+  }
+
+  .presence-label {
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+  }
+}

@@ -1,0 +1,42 @@
+:root {
+  /* FONTS */
+  --font-primary: "Inter", sans-serif;
+  --font-display: "Playfair Display", serif;
+
+  /* LETTER SPACING */
+  --ls-wide: 0.22em;
+  --ls-medium: 0.14em;
+
+  /* LUXURY ORANGE PALETTE (DESATURATED) */
+  --orange-1: #f6ede4; /* soft cream */
+  --orange-2: #f1dcc8; /* warm pastel */
+  --orange-3: #e8c3a2; /* muted orange */
+  --orange-4: #c98b5f; /* deep luxury amber */
+
+  --white: #ffffff;
+}
+
+/* GLOBAL BACKGROUND */
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font-primary);
+  color: #111;
+
+  background:
+    radial-gradient(
+      1200px 600px at 50% -10%,
+      rgba(255, 255, 255, 0.55),
+      transparent 60%
+    ),
+    linear-gradient(
+      180deg,
+      var(--orange-1) 0%,
+      var(--orange-2) 35%,
+      var(--orange-3) 65%,
+      var(--orange-4) 100%
+    );
+
+  background-attachment: fixed;
+  overflow-x: hidden;
+}

@@ -1,0 +1,357 @@
+/* =============================
+   BASE
+============================= */
+
+.lux-checkout {
+  max-width: 1240px;
+  margin: auto;
+  padding: 120px 6vw;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #0a0a0a;
+}
+
+.lux-checkout-header {
+  margin-bottom: 70px;
+}
+
+.lux-checkout-header h1 {
+  font-size: 44px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+.lux-checkout-header p {
+  margin-top: 10px;
+  color: #777;
+}
+
+/* =============================
+   GRID
+============================= */
+
+.lux-checkout-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 0.7fr;
+  gap: 70px;
+}
+
+/* =============================
+   ITEM CARDS
+============================= */
+
+.lux-items {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+.lux-item-card {
+  display: grid;
+  grid-template-columns: 110px 1fr auto;
+  align-items: center;
+  gap: 26px;
+  padding: 26px;
+  border-radius: 26px;
+  background: #f7f7f7;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.lux-item-card:hover {
+  background: #fff;
+  transform: translateY(-3px);
+  box-shadow: 0 35px 80px rgba(0, 0, 0, 0.08);
+}
+
+.lux-image-wrap {
+  width: 110px;
+  height: 150px;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #eee;
+}
+
+.lux-image-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.lux-item-meta h3 {
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.lux-item-meta span {
+  display: block;
+  margin-top: 6px;
+  font-size: 13px;
+  color: #777;
+}
+
+.lux-item-price {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+/* =============================
+   SUMMARY (GLASS CARD)
+============================= */
+
+.lux-summary {
+  position: sticky;
+  top: 120px;
+}
+
+.lux-summary-card {
+  background: linear-gradient(
+    180deg,
+    #111 0%,
+    #000 100%
+  );
+  color: #fff;
+  border-radius: 28px;
+  padding: 36px;
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.35);
+}
+
+.lux-summary-card h2 {
+  font-size: 22px;
+  font-weight: 500;
+  margin-bottom: 34px;
+}
+
+.lux-line {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 18px;
+  font-size: 14px;
+}
+
+.lux-line.muted {
+  color: #aaa;
+}
+
+.lux-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.12);
+  margin: 26px 0;
+}
+
+.lux-total {
+  display: flex;
+  justify-content: space-between;
+  font-size: 20px;
+  margin-bottom: 30px;
+}
+
+.lux-pay-btn {
+  width: 100%;
+  padding: 15px;
+  background: #fff;
+  color: #000;
+  border: none;
+  border-radius: 14px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.lux-pay-btn:hover {
+  opacity: 0.92;
+}
+
+.lux-secure {
+  margin-top: 18px;
+  font-size: 12px;
+  text-align: center;
+  color: #aaa;
+}
+
+/* =============================
+   LOADING
+============================= */
+
+.lux-loading {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #777;
+}
+
+/* =============================
+   MOBILE
+============================= */
+
+@media (max-width: 900px) {
+  .lux-checkout-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .lux-summary {
+    position: static;
+  }
+
+  .lux-item-card {
+    grid-template-columns: 90px 1fr;
+  }
+
+  .lux-item-price {
+    grid-column: span 2;
+    margin-top: 10px;
+  }
+}
+/* =============================
+   ADDRESS CARD
+============================= */
+
+.lux-address-card {
+  background: #f7f7f7;
+  border-radius: 28px;
+  padding: 34px;
+  margin-bottom: 60px;
+}
+
+.lux-address-card h2 {
+  font-size: 22px;
+  font-weight: 500;
+  margin-bottom: 26px;
+}
+
+.lux-field input,
+.lux-field textarea,
+.lux-row input {
+  width: 100%;
+  padding: 16px;
+  font-size: 14px;
+  border-radius: 14px;
+  border: 1px solid #e1e1e1;
+  outline: none;
+  font-family: inherit;
+}
+
+.lux-field textarea {
+  resize: none;
+  height: 90px;
+}
+
+.lux-field {
+  margin-bottom: 18px;
+}
+
+.lux-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+/* MOBILE */
+@media (max-width: 640px) {
+  .lux-row {
+    grid-template-columns: 1fr;
+  }
+}
+.lux-address-card,
+.lux-item-card,
+.lux-summary-card,
+.lux-checkout-header {
+  will-change: transform, opacity, filter;
+}
+@media (max-width: 480px) {
+  .lux-checkout {
+    padding: 88px 6vw;
+  }
+
+  .lux-checkout-header {
+    margin-bottom: 48px;
+  }
+
+  .lux-checkout-header h1 {
+    font-size: 30px;
+    letter-spacing: -0.01em;
+  }
+
+  .lux-checkout-header p {
+    font-size: 13px;
+    margin-top: 8px;
+  }
+
+  .lux-address-card {
+    padding: 26px;
+    margin-bottom: 44px;
+    border-radius: 22px;
+  }
+
+  .lux-address-card h2 {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+
+  .lux-field input,
+  .lux-field textarea,
+  .lux-row input {
+    padding: 14px;
+    font-size: 13px;
+    border-radius: 12px;
+  }
+
+  .lux-items {
+    gap: 22px;
+  }
+
+  .lux-item-card {
+    padding: 20px;
+    gap: 18px;
+    border-radius: 22px;
+  }
+
+  .lux-image-wrap {
+    width: 80px;
+    height: 112px;
+    border-radius: 14px;
+  }
+
+  .lux-item-meta h3 {
+    font-size: 15px;
+  }
+
+  .lux-item-meta span {
+    font-size: 12px;
+    margin-top: 4px;
+  }
+
+  .lux-item-price {
+    font-size: 14px;
+  }
+
+  .lux-summary-card {
+    padding: 26px;
+    border-radius: 22px;
+  }
+
+  .lux-summary-card h2 {
+    font-size: 18px;
+    margin-bottom: 24px;
+  }
+
+  .lux-line {
+    font-size: 13px;
+    margin-bottom: 14px;
+  }
+
+  .lux-total {
+    font-size: 18px;
+    margin-bottom: 24px;
+  }
+
+  .lux-pay-btn {
+    padding: 14px;
+    font-size: 14px;
+    border-radius: 12px;
+  }
+
+  .lux-secure {
+    font-size: 11px;
+    margin-top: 14px;
+  }
+}

@@ -1,0 +1,170 @@
+/* ===============================
+   APPLE-STYLE HIGHLIGHT CAROUSEL
+================================ */
+
+.highlight-luxury {
+  width: 100%;
+  padding: 40px 0 120px;
+  text-align: center;
+  overflow: hidden;
+}
+
+/* TITLE */
+.highlight-title h2 {
+  font-family: var(--font-display);
+  font-size: clamp(2.8rem, 5vw, 4.2rem);
+  font-weight: 400;
+  letter-spacing: var(--ls-wide);
+  margin-bottom: 40px;
+}
+
+/* VIEWPORT */
+.highlight-viewport {
+  position: relative;
+  width: 100%;
+  height: 92vh;                 /* 🔥 taller frame */
+  overflow: hidden;
+}
+
+/* TRACK */
+.highlight-track {
+  display: flex;
+  height: 100%;
+  will-change: transform;
+}
+
+/* SLIDE */
+.highlight-slide {
+  flex: 0 0 68%;
+  margin: 0 2%;
+  height: 100%;
+  border-radius: 32px;
+  overflow: hidden;
+  background: #000;
+  opacity: 0.45;
+  transform: scale(0.93);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+/* ACTIVE */
+.highlight-slide.active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* IMAGE */
+.highlight-slide img {
+  width: 115%;
+  height: 115%;
+  object-fit: cover;
+  transform-origin: center;
+  will-change: transform;
+}
+
+/* ARROWS */
+.nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255,255,255,0.16);
+  border: none;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  color: #fff;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  font-size: 22px;
+  z-index: 5;
+}
+
+.nav.left {
+  left: 32px;
+}
+
+.nav.right {
+  right: 32px;
+}
+
+.nav:hover {
+  background: rgba(255,255,255,0.26);
+}
+
+/* TEXT */
+.highlight-caption {
+  max-width: 720px;
+  margin: 40px auto 24px;
+  font-size: 1rem;
+  letter-spacing: var(--ls-medium);
+  opacity: 0.9;
+}
+
+/* PROGRESS */
+.highlight-progress {
+  width: 200px;
+  height: 2px;
+  background: rgba(0,0,0,0.15);
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.highlight-progress span {
+  display: block;
+  height: 100%;
+  width: 0%;
+  background: #000;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .highlight-viewport {
+    height: 55vh;
+  }
+
+  .highlight-slide {
+    flex: 0 0 86%;
+    margin: 0 7%;
+  }
+
+  .nav {
+    display: none;
+  }
+}
+@media (max-width: 480px) {
+  .highlight-luxury {
+    padding: 24px 0 96px;
+  }
+
+  .highlight-title h2 {
+    font-size: 2.2rem;
+    letter-spacing: 0.14em;
+    margin-bottom: 28px;
+  }
+
+  .highlight-viewport {
+    height: 48vh;
+  }
+
+  .highlight-slide {
+    flex: 0 0 92%;
+    margin: 0 4%;
+    border-radius: 22px;
+  }
+
+  .highlight-slide img {
+    width: 120%;
+    height: 120%;
+  }
+
+  .highlight-caption {
+    margin: 28px auto 20px;
+    font-size: 0.88rem;
+    letter-spacing: 0.12em;
+    max-width: 88%;
+  }
+
+  .highlight-progress {
+    width: 160px;
+  }
+}
