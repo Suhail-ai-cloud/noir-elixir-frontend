@@ -5,6 +5,7 @@ import { addToCart } from "../../services/cart.api";
 import RefundPolicy from "../RefundPolicy/RefundPolicy";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import LuxToast from "../../components/LuxToast/LuxToast";
 import "./ProductDetail.css";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -18,19 +19,29 @@ export default function ProductDetail() {
   const [quantity, setQuantity] = useState(1);
   const [activeImage, setActiveImage] = useState(null);
 
+  /* 🔔 TOAST STATE */
+  const [toast, setToast] = useState(null);
+  const [adding, setAdding] = useState(false);
+
   /* GSAP refs */
   const sectionRef = useRef(null);
   const imageRef = useRef(null);
   const thumbsRef = useRef([]);
   const infoRef = useRef([]);
 
+  /* =========================
+     FETCH PRODUCT
+  ========================= */
   useEffect(() => {
-    api.get(`/products/${slug}/`)
+    api
+      .get(`/products/${slug}/`)
       .then((res) => {
         setProduct(res.data);
+
         if (res.data.variants?.length) {
           setSelectedVariant(res.data.variants[0]);
         }
+
         if (res.data.images?.length) {
           setActiveImage(res.data.images[0].image);
         }
@@ -41,7 +52,6 @@ export default function ProductDetail() {
   /* =========================
      GSAP SCROLL ANIMATION
   ========================= */
-
   useEffect(() => {
     if (!product) return;
 
@@ -50,7 +60,7 @@ export default function ProductDetail() {
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top 70%",
-          once: true, // 🔒 play only once
+          once: true,
         },
       });
 
@@ -96,6 +106,9 @@ export default function ProductDetail() {
   const unitPrice = Number(selectedVariant.price);
   const totalPrice = unitPrice * quantity;
 
+  /* =========================
+     AUTH CHECK
+  ========================= */
   const requireAuth = () => {
     const token = localStorage.getItem("access_token");
     if (!token) {
@@ -105,13 +118,35 @@ export default function ProductDetail() {
     return true;
   };
 
+  /* =========================
+     ADD TO BAG HANDLER
+  ========================= */
+const handleAddToBag = async () => {
+  if (!requireAuth()) return;
+
+  setAdding(true);
+
+  try {
+    await addToCart(selectedVariant.id, quantity);
+    setToast({ type: "success", message: "Added to bag" });
+  } catch {
+    setToast({ type: "error", message: "Could not add to bag" });
+  } finally {
+    setAdding(false);
+  }
+};
+
+
   return (
     <>
       <section ref={sectionRef} className="pd-wrapper">
         {/* IMAGE GALLERY */}
         <div className="pd-image-section">
           <div ref={imageRef} className="pd-image">
-            <img src={activeImage || "/placeholder.jpg"} alt={product.name} />
+            <img
+              src={activeImage || "/placeholder.jpg"}
+              alt={product.name}
+            />
           </div>
 
           {product.images.length > 1 && (
@@ -134,7 +169,10 @@ export default function ProductDetail() {
 
         {/* DETAILS */}
         <div className="pd-info">
-          <h1 ref={(el) => (infoRef.current[0] = el)}>{product.name}</h1>
+          <h1 ref={(el) => (infoRef.current[0] = el)}>
+            {product.name}
+          </h1>
+
           <p ref={(el) => (infoRef.current[1] = el)} className="pd-scent">
             {product.scent}
           </p>
@@ -169,11 +207,13 @@ export default function ProductDetail() {
           <div ref={(el) => (infoRef.current[4] = el)} className="pd-quantity">
             <label>Quantity</label>
             <div className="qty-controls">
-              <button onClick={() => setQuantity(q => Math.max(1, q - 1))}>−</button>
+              <button onClick={() => setQuantity((q) => Math.max(1, q - 1))}>
+                −
+              </button>
               <span>{quantity}</span>
               <button
                 disabled={quantity >= selectedVariant.stock}
-                onClick={() => setQuantity(q => q + 1)}
+                onClick={() => setQuantity((q) => q + 1)}
               >
                 +
               </button>
@@ -186,24 +226,27 @@ export default function ProductDetail() {
 
           <div ref={(el) => (infoRef.current[6] = el)} className="pd-actions">
             <button
-              className="btn-primary"
-              onClick={async () => {
-                if (!requireAuth()) return;
-                try {
-                  await addToCart(selectedVariant.id, quantity);
-                  alert("Added to bag");
-                } catch {
-                  alert("Failed to add to bag");
-                }
-              }}
-            >
-              Add to Bag
-            </button>
+  className="btn-primary"
+  onClick={handleAddToBag}
+  disabled={adding}
+>
+  {adding ? "Adding…" : "Add to Bag"}
+</button>
+
           </div>
         </div>
       </section>
 
       <RefundPolicy />
+
+      {/* 🔔 LUXURY TOAST */}
+      {toast && (
+        <LuxToast
+          type={toast.type}
+          message={toast.message}
+          onClose={() => setToast(null)}
+        />
+      )}
     </>
   );
 }

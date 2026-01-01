@@ -1,42 +1,82 @@
+/* =========================
+   GLOBAL DESIGN TOKENS
+========================= */
 :root {
   /* FONTS */
-  --font-primary: "Inter", sans-serif;
+  --font-primary: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
   --font-display: "Playfair Display", serif;
 
   /* LETTER SPACING */
   --ls-wide: 0.22em;
   --ls-medium: 0.14em;
 
-  /* LUXURY ORANGE PALETTE (DESATURATED) */
-  --orange-1: #f6ede4; /* soft cream */
-  --orange-2: #f1dcc8; /* warm pastel */
-  --orange-3: #e8c3a2; /* muted orange */
-  --orange-4: #c98b5f; /* deep luxury amber */
+  /* LUXURY ORANGE PALETTE */
+  --orange-1: #f6ede4;
+  --orange-2: #f1dcc8;
+  --orange-3: #e8c3a2;
+  --orange-4: #c98b5f;
 
+  /* TEXT */
+  --text-primary: #111;
   --white: #ffffff;
 }
 
-/* GLOBAL BACKGROUND */
+/* =========================
+   CSS RESET (SAFE)
+========================= */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
-  min-height: 100vh;
+  min-height: 100svh; /* mobile-safe viewport */
   font-family: var(--font-primary);
-  color: #111;
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
 
+  /* PERFORMANCE-SAFE BACKGROUND */
   background:
     radial-gradient(
-      1200px 600px at 50% -10%,
-      rgba(255, 255, 255, 0.55),
-      transparent 60%
+      900px 500px at 50% -15%,
+      rgba(255, 255, 255, 0.5),
+      transparent 65%
     ),
     linear-gradient(
       180deg,
       var(--orange-1) 0%,
-      var(--orange-2) 35%,
-      var(--orange-3) 65%,
+      var(--orange-2) 40%,
+      var(--orange-3) 70%,
       var(--orange-4) 100%
     );
 
-  background-attachment: fixed;
-  overflow-x: hidden;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* =========================
+   DESKTOP ENHANCEMENT ONLY
+========================= */
+@media (min-width: 1024px) {
+  body {
+    background-attachment: fixed;
+  }
+}
+
+/* =========================
+   LOW-END / MOBILE SAFETY
+========================= */
+@media (max-width: 768px) {
+  body {
+    background-attachment: scroll;
+  }
 }

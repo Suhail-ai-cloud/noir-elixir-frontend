@@ -22,6 +22,9 @@ export default function Checkout() {
     pincode: "",
   });
 
+  const [acceptedTerms, setAcceptedTerms] = useState(false);
+  const [showHint, setShowHint] = useState(false);
+
   /* GSAP refs */
   const sectionRef = useRef(null);
   const headerRef = useRef(null);
@@ -41,10 +44,6 @@ export default function Checkout() {
       .finally(() => setLoading(false));
   }, [navigate]);
 
-  /* =========================
-     GSAP SCROLL ANIMATION
-  ========================= */
-
   useEffect(() => {
     if (!items.length) return;
 
@@ -53,7 +52,7 @@ export default function Checkout() {
         scrollTrigger: {
           trigger: sectionRef.current,
           start: "top 70%",
-          once: true, // 🔒 play once only
+          once: true,
         },
       });
 
@@ -107,9 +106,21 @@ export default function Checkout() {
 
   const handleAddressChange = (e) => {
     setAddress({ ...address, [e.target.name]: e.target.value });
+    setShowHint(false);
   };
 
+  const isAddressComplete = Object.values(address).every(
+    (field) => field.trim() !== ""
+  );
+
+  const canProceed = isAddressComplete && acceptedTerms;
+
   const handleContinue = async () => {
+    if (!canProceed) {
+      setShowHint(true);
+      return;
+    }
+
     try {
       const res = await api.post("/orders/create/", address);
       navigate("/payment", {
@@ -119,7 +130,7 @@ export default function Checkout() {
         },
       });
     } catch {
-      alert("Please fill all delivery details");
+      setShowHint(true);
     }
   };
 
@@ -161,6 +172,26 @@ export default function Checkout() {
             <div className="lux-field">
               <input name="pincode" placeholder="Pincode" onChange={handleAddressChange} />
             </div>
+
+            {/* TERMS */}
+            <div className="lux-terms">
+              <label className="lux-checkbox">
+                <input
+                  type="checkbox"
+                  checked={acceptedTerms}
+                  onChange={(e) => {
+                    setAcceptedTerms(e.target.checked);
+                    setShowHint(false);
+                  }}
+                />
+                <span>
+                  I agree to the{" "}
+                  <a href="/refund-policy" target="_blank" rel="noopener noreferrer">
+                    no-refund & no-return policy
+                  </a>
+                </span>
+              </label>
+            </div>
           </div>
 
           {/* ITEMS */}
@@ -172,7 +203,10 @@ export default function Checkout() {
                 className="lux-item-card"
               >
                 <div className="lux-image-wrap">
-                  <img src={item.product_image || "/placeholder-perfume.jpg"} alt={item.product_name} />
+                  <img
+                    src={item.product_image || "/placeholder-perfume.jpg"}
+                    alt={item.product_name}
+                  />
                 </div>
 
                 <div className="lux-item-meta">
@@ -210,9 +244,19 @@ export default function Checkout() {
               <strong>₹{totalAmount.toFixed(2)}</strong>
             </div>
 
-            <button className="lux-pay-btn" onClick={handleContinue}>
+            <button
+              className="lux-pay-btn"
+              disabled={!canProceed}
+              onClick={handleContinue}
+            >
               Continue to payment
             </button>
+
+            {showHint && (
+              <p className="lux-hint">
+                Please complete all delivery details and accept the policy to proceed.
+              </p>
+            )}
 
             <p className="lux-secure">Secure & encrypted checkout</p>
           </div>

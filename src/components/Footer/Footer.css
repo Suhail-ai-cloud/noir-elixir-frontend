@@ -1,0 +1,123 @@
+.lux-footer {
+  margin-top: 140px;
+  padding: 100px 6vw 40px;
+  background: #0a0a0a;
+  color: #eaeaea;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* INNER GRID */
+.lux-footer-inner {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr;
+  gap: 80px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* BRAND */
+.lux-footer-brand h2 {
+  font-size: 32px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  margin-bottom: 18px;
+}
+
+.lux-footer-brand p {
+  font-size: 14px;
+  line-height: 1.7;
+  color: #b5b5b5;
+}
+
+/* LINKS */
+.lux-footer-links {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+}
+
+.lux-footer-links span,
+.lux-footer-contact span {
+  display: block;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  color: #777;
+  margin-bottom: 18px;
+  text-transform: uppercase;
+}
+
+.lux-footer-links a {
+  display: block;
+  font-size: 14px;
+  color: #dcdcdc;
+  text-decoration: none;
+  margin-bottom: 12px;
+  transition: opacity 0.3s ease;
+}
+
+.lux-footer-links a:hover {
+  opacity: 0.65;
+}
+
+/* CONTACT */
+.lux-footer-contact {
+  text-align: right;
+}
+
+.lux-footer-icons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 18px;
+}
+
+.lux-footer-icons a {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 18px;
+  transition: all 0.3s ease;
+}
+
+.lux-footer-icons a:hover {
+  background: #fff;
+  color: #000;
+  transform: translateY(-2px);
+}
+
+/* BOTTOM */
+.lux-footer-bottom {
+  margin-top: 80px;
+  padding-top: 30px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: #888;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .lux-footer-inner {
+    grid-template-columns: 1fr;
+    gap: 60px;
+  }
+
+  .lux-footer-contact {
+    text-align: left;
+  }
+
+  .lux-footer-icons {
+    justify-content: flex-start;
+  }
+
+  .lux-footer-bottom {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+}

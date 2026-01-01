@@ -60,14 +60,32 @@
    GRID (CARD SIZE CONTROL)
 ========================= */
 
-.plp-apple-grid {
+/* .plp-apple-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 40px 30px;
   max-width: 900px;
   margin: 0 auto;
-}
+} */
 
+/* =========================
+   GRID (CONSISTENT CARD SIZE)
+========================= */
+
+.plp-apple-grid {
+  display: grid;
+
+  /* Fixed luxury card width */
+  grid-template-columns: repeat(auto-fill, minmax(260px, 260px));
+
+  /* Center grid when fewer items */
+  justify-content: center;
+
+  gap: 48px 36px;
+
+  max-width: 1200px;
+  margin: 0 auto;
+}
 
 
 /* =========================

@@ -1,13 +1,17 @@
 import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { getProducts } from "../services/products.api";
 import { addToCart } from "../services/cart.api";
+import LuxToast from "../components/LuxToast/LuxToast";
 import "../styles/Section.css";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Story() {
+  const navigate = useNavigate();
+
   const sectionRef = useRef(null);
   const headerRef = useRef(null);
   const imageWrapRef = useRef(null);
@@ -16,15 +20,25 @@ export default function Story() {
   const stickyRef = useRef(null);
 
   const [product, setProduct] = useState(null);
+  const [toast, setToast] = useState(null);
+  const [adding, setAdding] = useState(false);
 
   /* =========================
      FETCH PRODUCT ID = 1
   ========================= */
-  useEffect(() => {
-    getProducts().then((data) => {
-      setProduct(data.find((p) => p.id === 1));
-    });
-  }, []);
+useEffect(() => {
+  getProducts().then((data) => {
+    if (!data || data.length === 0) return;
+
+    // ✅ Always pick the first available product
+    const firstProduct = [...data].sort(
+      (a, b) => a.id - b.id
+    )[0];
+
+    setProduct(firstProduct);
+  });
+}, []);
+
 
   /* =========================
      GSAP SCROLL ANIMATIONS
@@ -94,48 +108,75 @@ export default function Story() {
   }, [product]);
 
   /* =========================
-     ADD TO BAG FLY EFFECT
+     AUTH CHECK
   ========================= */
-  const handleAddToBag = () => {
-    addToCart(product.id);
+  const requireAuth = () => {
+    const token = localStorage.getItem("access_token");
+    if (!token) {
+      navigate("/login");
+      return false;
+    }
+    return true;
+  };
 
-    const button = document.querySelector(".btn-secondary");
-    const bagIcon = document.getElementById("nav-bag-icon");
-    const flyEl = flyRef.current;
+  /* =========================
+     ADD TO BAG HANDLER
+  ========================= */
+  const handleAddToBag = async () => {
+    if (!requireAuth()) return;
+    if (!product || adding) return;
 
-    if (!button || !bagIcon || !flyEl) return;
+    setAdding(true);
 
-    const btnRect = button.getBoundingClientRect();
-    const bagRect = bagIcon.getBoundingClientRect();
+    try {
+      await addToCart(product.id);
 
-    gsap.set(flyEl, {
-      x: btnRect.left + btnRect.width / 2,
-      y: btnRect.top + btnRect.height / 2,
-      scale: 0.6,
-      opacity: 1,
-    });
+      /* 🔔 LUXURY TOAST */
+      setToast({ type: "success", message: "Added to bag" });
 
-    gsap.fromTo(
-      button,
-      { scale: 1 },
-      { scale: 0.94, duration: 0.12, yoyo: true, repeat: 1 }
-    );
+      /* ===== FLY TO BAG ANIMATION ===== */
+      const button = document.querySelector(".btn-secondary");
+      const bagIcon = document.getElementById("nav-bag-icon");
+      const flyEl = flyRef.current;
 
-    gsap.to(flyEl, {
-      x: bagRect.left + bagRect.width / 2,
-      y: bagRect.top + bagRect.height / 2,
-      scale: 0.15,
-      opacity: 0,
-      duration: 0.9,
-      ease: "power3.inOut",
-      onComplete: () => {
-        gsap.fromTo(
-          bagIcon,
-          { scale: 1 },
-          { scale: 1.15, duration: 0.25, yoyo: true, repeat: 1 }
-        );
-      },
-    });
+      if (!button || !bagIcon || !flyEl) return;
+
+      const btnRect = button.getBoundingClientRect();
+      const bagRect = bagIcon.getBoundingClientRect();
+
+      gsap.set(flyEl, {
+        x: btnRect.left + btnRect.width / 2,
+        y: btnRect.top + btnRect.height / 2,
+        scale: 0.6,
+        opacity: 1,
+      });
+
+      gsap.fromTo(
+        button,
+        { scale: 1 },
+        { scale: 0.94, duration: 0.12, yoyo: true, repeat: 1 }
+      );
+
+      gsap.to(flyEl, {
+        x: bagRect.left + bagRect.width / 2,
+        y: bagRect.top + bagRect.height / 2,
+        scale: 0.15,
+        opacity: 0,
+        duration: 0.9,
+        ease: "power3.inOut",
+        onComplete: () => {
+          gsap.fromTo(
+            bagIcon,
+            { scale: 1 },
+            { scale: 1.15, duration: 0.25, yoyo: true, repeat: 1 }
+          );
+        },
+      });
+    } catch {
+      setToast({ type: "error", message: "Could not add to bag" });
+    } finally {
+      setAdding(false);
+    }
   };
 
   if (!product) return null;
@@ -143,7 +184,7 @@ export default function Story() {
   return (
     <>
       <section ref={sectionRef} className="module product">
-        {/* SECTION HEADER (NOT PRODUCT NAME) */}
+        {/* SECTION HEADER */}
         <div ref={headerRef} className="product-header">
           <h1 className="page-title">Our Signature Creation</h1>
           <p className="page-subtitle">
@@ -153,7 +194,7 @@ export default function Story() {
 
         {/* CONTENT */}
         <div className="module-inner product-inner">
-          {/* IMAGE + NAME */}
+          {/* IMAGE */}
           <div ref={imageWrapRef} className="product-image-wrap">
             <div className="product-image">
               <img src={product.image} alt={product.name} />
@@ -167,15 +208,21 @@ export default function Story() {
               {product.concentration || "Eau de Parfum"}
             </h2>
 
-            <p className="product-description">{product.description}</p>
+            <p className="product-description">
+              {product.description}
+            </p>
 
             <div className="product-price">
               ₹{product.starting_price}
             </div>
 
             <div className="product-actions">
-              <button className="btn-secondary" onClick={handleAddToBag}>
-                Add to Bag
+              <button
+                className="btn-secondary"
+                onClick={handleAddToBag}
+                disabled={adding}
+              >
+                {adding ? "Adding…" : "Add to Bag"}
               </button>
             </div>
           </div>
@@ -185,11 +232,22 @@ export default function Story() {
       {/* STICKY ADD TO BAG */}
       <div ref={stickyRef} className="sticky-add">
         <span>{product.name}</span>
-        <button onClick={handleAddToBag}>Add to Bag</button>
+        <button onClick={handleAddToBag} disabled={adding}>
+          {adding ? "Adding…" : "Add to Bag"}
+        </button>
       </div>
 
       {/* FLYING GLOW */}
       <div ref={flyRef} className="fly-to-bag" />
+
+      {/* 🔔 LUXURY TOAST */}
+      {toast && (
+        <LuxToast
+          type={toast.type}
+          message={toast.message}
+          onClose={() => setToast(null)}
+        />
+      )}
     </>
   );
 }
